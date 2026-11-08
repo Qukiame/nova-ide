@@ -9,7 +9,7 @@
 [![PyInstaller](https://img.shields.io/badge/built%20with-PyInstaller-6.0%2B-blueviolet.svg)](https://pyinstaller.org)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey.svg)](#установка)
-[![Stars](https://img.shields.io/github/stars/YOUR_USERNAME/nova-ide?style=social)](https://github.com/YOUR_USERNAME/nova-ide/stargazers)
+[![Stars](https://img.shields.io/github/stars/Qukiame/nova-ide?style=social)](https://github.com/Qukiame/nova-ide/stargazers)
 
 <img src="assets/nova_icon.png" alt="Nova IDE" width="128" height="128"/>
 
@@ -50,7 +50,7 @@
 ### Вариант 1: Запуск из исходника (любая ОС)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/nova-ide.git
+git clone https://github.com/Qukiame/nova-ide.git
 cd nova-ide
 pip install -r requirements.txt
 python nova_ide.py
