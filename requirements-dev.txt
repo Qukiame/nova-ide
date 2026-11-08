@@ -1,0 +1,13 @@
+# Nova IDE — development dependencies
+# Дополнительно к requirements.txt
+
+# Сборка standalone-бинарника
+pyinstaller>=6.0
+
+# Конвертация иконок (опционально — для пересборки assets/)
+cairosvg>=2.7
+Pillow>=10.0
+
+# Линтинг (опционально)
+flake8>=6.0
+black>=23.0

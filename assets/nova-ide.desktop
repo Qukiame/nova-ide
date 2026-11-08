@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Nova IDE
+Comment=Lightweight beautiful IDE for Python, JS, HTML and more
+Comment[ru]=Лёгкая красивая IDE для Python, JS, HTML и других языков
+Exec=NovaIDE %F
+Icon=nova_icon
+Terminal=false
+Categories=Development;IDE;TextEditor;
+Keywords=code;editor;ide;python;development;
+StartupNotify=true
+MimeType=text/plain;text/x-python;text/javascript;text/html;text/css;application/json;text/markdown;

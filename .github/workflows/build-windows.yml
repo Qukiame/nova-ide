@@ -1,0 +1,74 @@
+name: Build Windows .exe
+
+# Этот workflow собирает NovaIDE.exe на windows-latest runner и
+# публикует его как artifact / в Releases.
+# Запускается:
+#   1. При пуше в main
+#   2. При создании тега v* (тогда ещё и публикует в Releases)
+#   3. Вручную (кнопка "Run workflow" во вкладке Actions)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    tags: [ "v*" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # нужно для создания Release при теге
+
+jobs:
+  build-windows:
+    name: Build NovaIDE.exe on Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install "pyinstaller>=6.0"
+
+      - name: Build with PyInstaller
+        shell: pwsh
+        run: |
+          python -m PyInstaller nova_ide_win.spec --noconfirm --clean
+
+      - name: Verify output
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "dist\NovaIDE.exe")) {
+            Write-Error "NovaIDE.exe not found in dist\"
+            exit 1
+          }
+          $size = (Get-Item "dist\NovaIDE.exe").Length
+          Write-Host "NovaIDE.exe size: $([math]::Round($size / 1MB, 2)) MB"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NovaIDE-windows-exe
+          path: dist/NovaIDE.exe
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Create Release on tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/NovaIDE.exe
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

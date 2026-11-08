@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Фон: тёмный с мягким радиальным свечением -->
+    <radialGradient id="bgGrad" cx="50%" cy="42%" r="65%">
+      <stop offset="0%"  stop-color="#1a2233"/>
+      <stop offset="55%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#06090e"/>
+    </radialGradient>
+
+    <!-- Свечение вокруг звезды -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#58a6ff" stop-opacity="0.55"/>
+      <stop offset="45%"  stop-color="#58a6ff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#58a6ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Градиент лучей звезды (синий -> зелёный) -->
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#7ee787"/>
+      <stop offset="55%"  stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#1f6feb"/>
+    </linearGradient>
+
+    <!-- Градиент для код-скобок -->
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c9d1d9"/>
+    </linearGradient>
+
+    <!-- Мягкая тень под звездой -->
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="4"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.45"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Блик на верхнем луче -->
+    <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+
+    <!-- Внешний скруглённый квадрат (как у app-иконок) -->
+    <clipPath id="appMask">
+      <rect x="0" y="0" width="512" height="512" rx="112" ry="112"/>
+    </clipPath>
+  </defs>
+
+  <!-- ====== Фон приложения (скруглённый квадрат) ====== -->
+  <g clip-path="url(#appMask)">
+    <rect width="512" height="512" fill="url(#bgGrad)"/>
+
+    <!-- Тонкая внутренняя рамка -->
+    <rect x="2" y="2" width="508" height="508" rx="110" ry="110"
+          fill="none" stroke="#21262d" stroke-width="2"/>
+
+    <!-- Свечение под звездой -->
+    <circle cx="256" cy="240" r="200" fill="url(#glow)"/>
+
+    <!-- ====== Сверхновая: 4-конечная звезда-вспышка ====== -->
+    <g filter="url(#softShadow)">
+      <!-- Внешняя «звезда» — вытянутые лучи -->
+      <path d="
+        M 256 92
+        L 286 226
+        L 420 256
+        L 286 286
+        L 256 420
+        L 226 286
+        L 92 256
+        L 226 226
+        Z"
+        fill="url(#starGrad)"/>
+
+      <!-- Внутренняя более яркая звезда (поверх) -->
+      <path d="
+        M 256 140
+        L 276 236
+        L 372 256
+        L 276 276
+        L 256 372
+        L 236 276
+        L 140 256
+        L 236 236
+        Z"
+        fill="#ffffff" opacity="0.92"/>
+
+      <!-- Ядро -->
+      <circle cx="256" cy="256" r="26" fill="#ffffff"/>
+      <circle cx="256" cy="256" r="14" fill="#7ee787"/>
+    </g>
+
+    <!-- ====== Код-скобки </> в ядре ====== -->
+    <g fill="none" stroke="#0d1117" stroke-width="6"
+       stroke-linecap="round" stroke-linejoin="round">
+      <!-- левая скобка < -->
+      <path d="M 244 248 L 232 256 L 244 264"/>
+      <!-- правая скобка > -->
+      <path d="M 268 248 L 280 256 L 268 264"/>
+      <!-- косая черта / -->
+      <path d="M 262 244 L 250 268"/>
+    </g>
+
+    <!-- ====== Орбитальные точки (намёк на редактор/IDE) ====== -->
+    <g>
+      <circle cx="120" cy="120" r="5" fill="#7ee787" opacity="0.85"/>
+      <circle cx="400" cy="130" r="4" fill="#58a6ff" opacity="0.75"/>
+      <circle cx="110" cy="395" r="4" fill="#58a6ff" opacity="0.7"/>
+      <circle cx="405" cy="395" r="5" fill="#7ee787" opacity="0.85"/>
+      <circle cx="256" cy="60"  r="3.5" fill="#c9d1d9" opacity="0.6"/>
+      <circle cx="256" cy="460" r="3.5" fill="#c9d1d9" opacity="0.6"/>
+    </g>
+
+    <!-- Лёгкий верхний блик -->
+    <path d="M 60 60 Q 256 30 452 60 L 452 100 Q 256 80 60 100 Z"
+          fill="#ffffff" opacity="0.04"/>
+  </g>
+</svg>
