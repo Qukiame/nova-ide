@@ -89,5 +89,5 @@
 - Один файл `nova_ide.py` (~1000 строк)
 - Лицензия: MIT
 
-[Unreleased]: https://github.com/YOUR_USERNAME/nova-ide/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/YOUR_USERNAME/nova-ide/releases/tag/v1.0.0
+[Unreleased]: https://github.com/Qukiame/nova-ide/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Qukiame/nova-ide/releases/tag/v1.0.0
